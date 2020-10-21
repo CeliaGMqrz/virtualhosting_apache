@@ -148,7 +148,7 @@ celia@debian:~/vagrant/virtualhosting$
 * Lo vemos desde nuestro navegador en la máquina anfitriona:
 
 **www.iesgn.org**
-![captura1.jpeg]()
+![cap1.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap1.jpeg)
 
 **www.departamentosgn.org**
-![captura2.jpeg]()
+![cap2.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap2.jpeg)
