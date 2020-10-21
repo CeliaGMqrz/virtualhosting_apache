@@ -104,7 +104,7 @@ root@mimaquina:~# chown -R www-data:www-data /var/www/iesgn
 
 Para terminar lo único que tendremos que hacer es cambiar el fichero hosts en los clientes y poner dos nuevas líneas donde se haga la conversión entre los dos nombre de dominio y la dirección IP del servidor.
 
-Le ponemos la dirección del sevidor, osea la ip de nuestra máquina virtual, que, en este caso está conectada por un puente a nuestra anfitriona.
+Le ponemos la dirección del servidor, osea la ip de nuestra máquina virtual, que, en este caso está conectada por un puente a nuestra anfitriona.
 
 ```sh
   GNU nano 3.2                      /etc/hosts                                
@@ -133,6 +133,8 @@ PING www.departamentosgn.org (192.168.100.143) 56(84) bytes of data.
 --- www.departamentosgn.org ping statistics ---
 2 packets transmitted, 2 received, 0% packet loss, time 15ms
 rtt min/avg/max/mdev = 0.374/0.390/0.406/0.016 ms
+
+
 celia@debian:~/vagrant/virtualhosting$ ping www.iesgn.org
 PING www.iesgn.org (192.168.100.143) 56(84) bytes of data.
 64 bytes from www.iesgn.org (192.168.100.143): icmp_seq=1 ttl=64 time=0.389 ms
@@ -148,7 +150,7 @@ celia@debian:~/vagrant/virtualhosting$
 * Lo vemos desde nuestro navegador en la máquina anfitriona:
 
 **www.iesgn.org**
-![cap1.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap1.jpeg)
+![cap2.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap2.jpeg)
 
 **www.departamentosgn.org**
-![cap2.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap2.jpeg)
+![cap1.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap1.jpeg)
