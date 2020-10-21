@@ -154,3 +154,23 @@ celia@debian:~/vagrant/virtualhosting$
 
 **www.departamentosgn.org**
 ![cap1.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/cap1.jpeg)
+
+
+### Repite el ejercicio cambiando los directorios de trabajo a /srv/www. ¿Qué modificación debes hacer en el fichero /etc/apache2/apache2.conf?
+
+Sería el mismo procedimiento solo que debemos editar el fichero de configuración de apache2.conf de la siguiente forma. Comentando el directorio que coge por defecto y descomentando el nuevo directorio. En él podemos copiar las carpetas que teniamos en www y hacemos el mismo procedimiento, cambiando el documenroot a los ficheros de configuracion antes de iniciarlos.
+
+```sh
+#<Directory /var/www/>
+#        Options Indexes FollowSymLinks
+#        AllowOverride None
+#        Require all granted
+#</Directory>
+
+<Directory /srv/>
+       Options Indexes FollowSymLinks
+       AllowOverride None
+       Require all granted
+</Directory>
+
+```
