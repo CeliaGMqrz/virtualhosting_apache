@@ -30,4 +30,16 @@ Queremos construir en nuestro servidor web apache dos sitios web con las siguien
 
 * En el segundo sitio vamos a crear una página donde se pondrán noticias por parte de los departamento, el nombre de este sitio será www.departamentosgn.org, y su directorio base será /var/www/departamentos. En este sitio sólo tendremos una página inicial index.html, dando la bienvenida a la página de los departamentos del instituto.
 
-TAREA -> [CONFIGURACIÓN DE VIRTUALHOSTING CON APACHE](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
+TAREAS:
+
+EJERCICIO 3 -> [CONFIGURACIÓN DE VIRTUALHOSTING CON APACHE](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
+EJERCICIO 4 -> [MAPEAR URL A UBICACIONES DE UN SISTEMA DE FICHEROS]()
+
+
+ÍNDICE:
+
+1. [Introducción HTTP](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/introduccion_http.md)
+2. [Introducción Apache](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/introduccion_apache.md)
+3. [Configuración de VirtualHosting con Apache](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
+4. [Otras configuraciones VirtualHost](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/otras_configuraciones.md)
+5. [Mapeo I. Directivas y Opciones](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapeo1.md)
