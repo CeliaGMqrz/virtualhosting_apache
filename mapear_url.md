@@ -245,6 +245,8 @@ systemctl restart apache2
 ```sh
     <Directory /srv/mapeo/principal>
             Options -Indexes -FollowSymLinks -MultiViews
+            AllowOverride None
+            Require all granted
     </Directory>
 
 ```
@@ -256,6 +258,138 @@ systemctl reload apache2
 
 ### 3. Si accedes a la página www.mapeo.com/principal/documentos se visualizarán los documentos que hay en /home/usuario/doc. Por lo tanto se permitirá el listado de fichero y el seguimiento de enlaces simbólicos siempre que el propietario del enlace y del fichero al que apunta sean el mismo usuario. Explica bien y pon una prueba de funcionamiento donde se vea bien el seguimiento de los enlaces simbólicos.
 
+* Editamos el fichero '/sites-avaliable/mapeo.conf' de nuevo.
+* Creamos un alias para acceder a /home/vagrant/doc. Ese alias debe de tener las opciones de permitir listar los archivos con **indexes** y el seguimiento de enlaces simbólicos con **FollowSymLinks**, además tenemos que poner las opciones de permisos para que los usuarios puedan acceder a él.
+
+```sh
+    # Alias para acceder a /home/user/doc
+    
+    Alias "/principal/documentos" "/home/vagrant/doc"
+    <Directory /home/vagrant/doc>
+            Options +Indexes +FollowSymLinks
+            AllowOverride None
+            Require all granted
+    </Directory>
+
+```
+* El fichero mapeo.conf quedaria de la siguiente manera:
+
+```sh
+<VirtualHost *:80>
+        # The ServerName directive sets the request scheme, hostname and port that
+        # the server uses to identify itself. This is used when creating
+        # redirection URLs. In the context of virtual hosts, the ServerName
+        # specifies what hostname must appear in the request's Host: header to
+        # match this virtual host. For the default virtual host (this file) this
+        # value is not decisive as it is used as a last resort host regardless.
+        # However, you must set it for any further virtual host explicitly.
+
+        ServerName www.mapeo.com
+        ServerAdmin webmaster@localhost
+        DocumentRoot /srv/mapeo
+
+        # Redirección permanente
+        RedirectMatch permanent ^/$ "/principal/"
+
+        <Directory /srv/mapeo/principal>
+                Options -Indexes -FollowSymLinks -MultiViews
+                AllowOverride None
+                Require all granted
+        </Directory>
+
+
+        # Alias para acceder a /home/user/doc
+
+        Alias "/principal/documentos" "/home/vagrant/doc"
+        <Directory /home/vagrant/doc>
+                Options +Indexes +FollowSymLinks
+                AllowOverride None
+                Require all granted
+        </Directory>
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+```
+
+* Creamos la carpeta doc en la carpeta personal del usuario y dentro creamos un fichero de prueba.
+
+```sh
+vagrant@mimaquina:~$ mkdir doc
+
+vagrant@mimaquina:~$ cd doc
+
+vagrant@mimaquina:~/doc$ ls
+vagrant@mimaquina:~/doc$ nano fichero_prueba.txt
+
+vagrant@mimaquina:~/doc$ ls
+fichero_prueba.txt
+
+```
+* Ahora vamos a crear el enlace simbolico a la carpeta doc de nuestro sistema. Previamente hemos creado la carpeta documentos en /srv/mapeo/principal/documentos y le hemos dado los permisos necesarios.
+
+```sh
+root@mimaquina:/srv/mapeo/principal# chown -h www-data:www-data documentos/
+
+root@mimaquina:/srv/mapeo/principal# ls -l
+total 8
+drwxr-xr-x 2 www-data www-data 4096 Oct 22 15:42 documentos
+-rwxr-xr-x 1      775 www-data  175 Oct 22 14:40 index.html
+```
+
+* Creamos el enlace y vamos a /srv/mapeo/principal/documentos/doc y vemos que se ha creado el enlace perfectamente.
+
+```sh
+root@mimaquina:/home/vagrant# ln -svf /home/vagrant/doc /srv/mapeo/principal/documentos
+'/srv/mapeo/principal/documentos/doc' -> '/home/vagrant/doc'
+
+root@mimaquina:/srv/mapeo/principal/documentos/doc# ls -la
+total 12
+drwxr-xr-x 2 www-data www-data 4096 Oct 22 16:08 .
+drwxr-xr-x 5 vagrant  vagrant  4096 Oct 22 15:30 ..
+-rwxr-xr-x 1 www-data www-data   35 Oct 22 15:30 fichero_prueba.txt
+
+
+```
+* Le damos el propietario al enlace
+
+```sh
+root@mimaquina:/home/vagrant# chown -h www-data:www-data doc
+root@mimaquina:/home/vagrant# ls -l
+total 4
+drwxr-xr-x 2 www-data www-data 4096 Oct 22 16:08 doc
+
+root@mimaquina:/home/vagrant/doc# ls -la
+total 12
+drwxr-xr-x 2 www-data www-data 4096 Oct 22 16:08 .
+drwxr-xr-x 5 vagrant  vagrant  4096 Oct 22 15:30 ..
+-rwxr-xr-x 1 www-data www-data   35 Oct 22 15:30 fichero_prueba.txt
+
+```
+
+* Reiniciamos el servicio
+
+<pre>systemctl restart apache2</pre>
+
+* Vamos al navegador y vemos que podemos ver la carpeta con el fichero de prueba
+
+![map3.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/map3.png)
+
+* Ahora queremos meter otro fichero de un propietario distinto y no debe de verse en el navegador
 
 
 
