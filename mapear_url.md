@@ -206,8 +206,6 @@ rtt min/avg/max/mdev = 0.415/0.496/0.577/0.081 ms
 
 ![map1.png]()
 
-
-
 ### 1. Cuando se entre a la dirección www.mapeo.com se redireccionará automáticamente a www.mapeo.com/principal, donde se mostrará el mensaje de bienvenida.
 
 * Primero deberemos crear el directorio principal y el html de bienvenida (debe de llamarse index.html para que apache te lo muestre.)
