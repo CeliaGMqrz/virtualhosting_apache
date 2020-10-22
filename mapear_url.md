@@ -238,18 +238,21 @@ systemctl restart apache2
 ![map2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/map2.png)
 
 
-
-
-
-
-
-
-
-
-
 ### 2. En el directorio principal no se permite ver la lista de los ficheros, no se permite que se siga los enlaces simbólicos y no se permite negociación de contenido. Muestra al profesor el funcionamiento. ¿Qué configuración tienes que poner?
 
+* Editamos el fichero mapeo.conf
 
+```sh
+    <Directory /srv/mapeo/principal>
+            Options -Indexes -FollowSymLinks -MultiViews
+    </Directory>
+
+```
+* Reiniciamos el servicio
+
+```sh
+systemctl reload apache2
+```
 
 ### 3. Si accedes a la página www.mapeo.com/principal/documentos se visualizarán los documentos que hay en /home/usuario/doc. Por lo tanto se permitirá el listado de fichero y el seguimiento de enlaces simbólicos siempre que el propietario del enlace y del fichero al que apunta sean el mismo usuario. Explica bien y pon una prueba de funcionamiento donde se vea bien el seguimiento de los enlaces simbólicos.
 
