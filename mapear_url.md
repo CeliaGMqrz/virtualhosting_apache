@@ -391,6 +391,32 @@ drwxr-xr-x 5 vagrant  vagrant  4096 Oct 22 15:30 ..
 
 * Ahora queremos meter otro fichero de un propietario distinto y no debe de verse en el navegador
 
-
-
 ### 4. En todo el host virtual se debe redefinir los mensajes de error de objeto no encontrado y no permitido. Para el ello se crearan dos ficheros html dentro del directorio error. Entrega las modificaciones necesarias en la configuración y una comprobación del buen funcionamiento.
+
+* Creamos los ficheros html dentro del directorio error.
+
+```sh
+root@mimaquina:/srv/mapeo# mkdir error
+root@mimaquina:/srv/mapeo# ls
+error  index.html  principal
+root@mimaquina:/srv/mapeo# cd error/
+root@mimaquina:/srv/mapeo/error# nano 404.html
+root@mimaquina:/srv/mapeo/error# nano 403.html
+root@mimaquina:/srv/mapeo/error# ls
+403.html  404.html
+
+```
+
+* Editamos el fichero: **localized-error-pages.conf**:
+
+```sh
+Alias /error/404 /svr/mapeo/error/404.html
+ErrorDocument 404 /error/404
+
+Alias /error/403 /svr/mapeo/error/403.html
+ErrorDocument 403 /error/403
+<location /error/>
+        SetHandler none
+</location>
+
+```
