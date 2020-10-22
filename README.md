@@ -18,19 +18,6 @@ Usando virtualhosting, el servidor desde una misma ip y desde el mismo puerto pu
 
 En Apache hay configurado un virtualhost por defecto. Se llama **default**. El server name no está indicado, es decir que podemos entrar con cualquier nombre o con la misma dirección ip. El document root donde están los ficheros es **/var/www/html**.
 
-## Objetivo 
-
-El objetivo de esta práctica es la puesta en marcha de dos sitios web utilizando el mismo servidor web apache. Hay que tener en cuenta lo siguiente:
-
-* Cada sitio web tendrá nombres distintos.
-
-* Cada sitio web compartirán la misma dirección IP y el mismo puerto (80).
-
-Queremos construir en nuestro servidor web apache dos sitios web con las siguientes características:
-
-* El nombre de dominio del primero será www.iesgn.org, su directorio base será /var/www/iesgn y contendrá una página llamada index.html, donde sólo se verá una bienvenida a la página del Instituto Gonzalo Nazareno.
-
-* En el segundo sitio vamos a crear una página donde se pondrán noticias por parte de los departamento, el nombre de este sitio será www.departamentosgn.org, y su directorio base será /var/www/departamentos. En este sitio sólo tendremos una página inicial index.html, dando la bienvenida a la página de los departamentos del instituto.
 
 TAREAS:
 
