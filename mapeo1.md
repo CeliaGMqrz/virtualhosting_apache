@@ -63,8 +63,10 @@ AliasMatch "/image/(.*)$" "/ftp/pub/image/$1"
 
 Un recurso puede estar disponible en diferentes representaciones. Negociación de contenidos: Apache puede escoger la mejor representación de un recurso basado en las preferencias proporcionadas por el navegador.
 
+<pre>
 # ls /var/www/html/internacional
 index.html.en index.html.es
+</pre>
 
 Puede elegir si quiere español o inglés.
 
