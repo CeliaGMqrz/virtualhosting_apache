@@ -55,7 +55,9 @@ Alias "/image" "/ftp/pub/image"
 ```
 * Podemos usar AliasMatch para lo mismo pero con expresiones regulares.
 
+```sh 
 AliasMatch "/image/(.*)$" "/ftp/pub/image/$1"
+```
 
 ## Negociación de contenidos
 
@@ -75,5 +77,5 @@ La directiva **redirect** es usada para pedir al cliente que haga otra peticón 
 
 ## Páginas de errores personalizadas
 
-![diapositiva.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/diapositiva.jpeg)
+![diapositiva1.jpeg](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/diapositiva1.jpeg)
 
