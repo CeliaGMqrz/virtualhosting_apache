@@ -204,7 +204,7 @@ rtt min/avg/max/mdev = 0.415/0.496/0.577/0.081 ms
 
 * Comprobamos que se ve desde el navegador **www.mapeo.com**
 
-![map1.png]()
+![map1.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/map1.png)
 
 ### 1. Cuando se entre a la dirección www.mapeo.com se redireccionará automáticamente a www.mapeo.com/principal, donde se mostrará el mensaje de bienvenida.
 
@@ -235,7 +235,7 @@ systemctl restart apache2
 
 * Vamos al navegador y vemos como se ha redireccionado.
 
-![map2.png]()
+![map2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/map2.png)
 
 
 
