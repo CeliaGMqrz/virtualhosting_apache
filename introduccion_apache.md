@@ -42,5 +42,5 @@ El fichero de configuración de apache2 en Debian era muy extenso y lo dividiero
 
 En ese fichero se determina el directorio de nuestro sitio web. Todas las opciones que configuremos en **Directory** se aplicarán a **/var/www/**
 
-captura3.png
+![captura3.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/captura3.png)
 
