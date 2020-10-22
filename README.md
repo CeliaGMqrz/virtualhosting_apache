@@ -22,7 +22,7 @@ En Apache hay configurado un virtualhost por defecto. Se llama **default**. El s
 TAREAS:
 
 * EJERCICIO 3 -> [CONFIGURACIÓN DE VIRTUALHOSTING CON APACHE](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
-* EJERCICIO 4 -> [MAPEAR URL A UBICACIONES DE UN SISTEMA DE FICHEROS]()
+* EJERCICIO 4 -> [MAPEAR URL A UBICACIONES DE UN SISTEMA DE FICHEROS](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapear_url.md)
 
 
 ÍNDICE:
