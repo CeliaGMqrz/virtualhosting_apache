@@ -1,5 +1,7 @@
 # VirtualHosting con Apache
 
+![banner_apache.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/banner_apache.png)
+
 ## Conceptos previos
 
 ### ¿Qué es un sitio web?
