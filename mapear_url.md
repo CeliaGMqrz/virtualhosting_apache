@@ -6,7 +6,9 @@
 
 La directiva **Alias** nos permite que el servidor sirva ficheros desde cualquier ubicación del sistema de archivo aunque esté fuera del directorio indicado en el **DocumentRoot**.
 
-<pre>Alias <url> <sistema de archivos></pre>
+```sh
+Alias <url> <sistema de archivos>
+```
 
 Ejemplo:
 
