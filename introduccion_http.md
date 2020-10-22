@@ -6,7 +6,7 @@
 
 El usuario escribe una URL, indicando el protocolo, servidor y recurso que quiere obtener, el servidor procesa la informacion y devuelve un mensaje de respuesta, normalmente con el HTML de la página que se va a visualizar.
 
-captura1.png
+![captura1.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/captura1.png)
 
 **En la cabecera host se indica el nombre del servidor que hemos puesto en la URL.**
 
@@ -24,7 +24,7 @@ Cuando quiero cambiar algo en el estado del servidor utilizamos POST. En el cuer
 
 ## Código de estados (Respuesta)
 
-captura2.png
+![captura2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/captura2.png)
 
 ## Cabeceras
 
