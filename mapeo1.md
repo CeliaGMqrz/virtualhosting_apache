@@ -3,7 +3,7 @@
 
 ## Directiva: Options
 
-* All.
+* All
 * FollowSymLinks: Enlace simbolico apunta a un directorio.
 * Indexes: Si no encuentra el index.html muestra un indice de ficheros que se encuentran ahí.
 * MultiViews: Negociacion de contenido, dependiendo de algunas configuraciones del cliente el servidor sirve un contenido o sirve otro.
