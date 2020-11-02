@@ -21,8 +21,9 @@ En Apache hay configurado un virtualhost por defecto. Se llama **default**. El s
 
 TAREAS:
 
-* EJERCICIO 3 -> [CONFIGURACIÓN DE VIRTUALHOSTING CON APACHE](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
-* EJERCICIO 4 -> [MAPEAR URL A UBICACIONES DE UN SISTEMA DE FICHEROS](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapear_url.md)
+* EJERCICIO 3 -> [Configuración de virtualhosting con apache](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
+* EJERCICIO 4 -> [Mapear URL a ubicaciones de un sistema de ficheros](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapear_url.md)
+* EJERCICIO 5 -> [Control de acceso, autentificación y autorización]()
 
 
 ÍNDICE:
@@ -32,3 +33,5 @@ TAREAS:
 3. [Configuración de VirtualHosting con Apache](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
 4. [Otras configuraciones VirtualHost](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/otras_configuraciones.md)
 5. [Mapeo I. Directivas y Opciones](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapeo1.md)
+6. [Mapeo II. Mapear URL a ubicaciones de un ssitema de ficheros](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapear_url.md)
+
