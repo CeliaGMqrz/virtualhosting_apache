@@ -420,7 +420,7 @@ the credentials required.</p>
 
 ### 4. Vamos a combinar el control de acceso (ejercicio 1) y la autentificación (Ejercicios 2 y 3), y vamos a configurar el virtual host para que se comporte de la siguiente manera: el acceso a la URL departamentos.iesgn.org/secreto se hace forma directa desde la intranet, desde la red pública te pide la autentificación. Muestra el resultado al profesor.
 
-* Modificamos el fichero departamentos.conf y le añadimos las lineas para permitir el acceso de forma directa desde la intranet.
+* Modificamos el fichero departamentos.conf y le añadimos las lineas para permitir el acceso de forma directa desde la intranet indicando la ip del cliente como permitida y la línea 'satisfy any'.
 
 ```sh
 <VirtualHost *:80>
