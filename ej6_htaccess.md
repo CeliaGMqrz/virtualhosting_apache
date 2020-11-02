@@ -41,7 +41,7 @@ Date de alta en un proveedor de hosting. ¿Si necesitamos configurar el servidor
 
 ![nasindex.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/nasindex.png)
 
-![nasindex2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/nasindex2.png)
+![nasindex2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/nasindex1.png)
 
 ### 2.Crea una redirección permanente: cuando entremos en ttp://host.dominio/google salte a www.google.es.
 
