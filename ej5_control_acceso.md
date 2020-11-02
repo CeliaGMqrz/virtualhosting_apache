@@ -170,15 +170,15 @@ Comprobamos que desde el navegador de nuestra **máquina anfitriona**:
 
 * Podemos acceder a la página principal:
 
-![principal.png]()
+![principal.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/principal.png)
 
 * Podemos acceder al apartado internet:
 
-![internet.png]()
+![internet.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/internet.png)
 
 * Pero no podemos acceder al apartado intranet:
 
-![intranet.png]()
+![intranet.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/intranet.png)
 
 Comprobamos desde la máquina **cliente** (instalamos previamente un navegador para sistemas sin entornos gráficos **lynx**):
 
@@ -188,7 +188,7 @@ Comprobamos desde la máquina **cliente** (instalamos previamente un navegador p
 vagrant@cliente:~$ lynx www.departamentos.iesgn.org
 ```
 
-![principalcliente.png]()
+![principalcliente.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/principalcliente.png)
 
 * Podemos acceder al apartado intranet
 
@@ -196,7 +196,7 @@ vagrant@cliente:~$ lynx www.departamentos.iesgn.org
 vagrant@cliente:~$ lynx www.departamentos.iesgn.org/intranet
 ```
 
-![intranetcliente.png]()
+![intranetcliente.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/intranetcliente.png)
 
 * No podemos acceder al apartado internet
 
@@ -204,4 +204,4 @@ vagrant@cliente:~$ lynx www.departamentos.iesgn.org/intranet
 vagrant@cliente:~$ lynx www.departamentos.iesgn.org/internet
 ```
 
-![internetcliente.png]()
+![internetcliente.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/internetcliente.png)

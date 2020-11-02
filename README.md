@@ -23,7 +23,7 @@ TAREAS:
 
 * EJERCICIO 3 -> [Configuración de virtualhosting con apache](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/configuracion.md)
 * EJERCICIO 4 -> [Mapear URL a ubicaciones de un sistema de ficheros](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapear_url.md)
-* EJERCICIO 5 -> [Control de acceso, autentificación y autorización]()
+* EJERCICIO 5 -> [Control de acceso, autentificación y autorización](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/ej5_control_acceso.md)
 
 
 ÍNDICE:
@@ -34,4 +34,4 @@ TAREAS:
 4. [Otras configuraciones VirtualHost](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/otras_configuraciones.md)
 5. [Mapeo I. Directivas y Opciones](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapeo1.md)
 6. [Mapeo II. Mapear URL a ubicaciones de un ssitema de ficheros](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/mapear_url.md)
-
+7. [Control de acceso, autentificación y autorización](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/ej5_control_acceso.md)
