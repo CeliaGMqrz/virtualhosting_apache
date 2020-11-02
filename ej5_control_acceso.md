@@ -245,7 +245,7 @@ root@servidor:/etc/apache2/claves# cat passwd.txt
 root:$apr1$cF/a2VEa$HanMH/3gocabJWDMqj12c.
 
 ```
-* Editamos el fichero de configuracion de nuestro virtual host
+* Editamos el fichero de configuracion de nuestro virtual host, añadiendo el documentroot para la pagina secreta, usando el fichero de contraseñas y la autentificación básica.
 
 ```sh
 nano /etc/apache2/sites-available/departamentos.conf
