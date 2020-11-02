@@ -50,8 +50,8 @@ nano index.html
 mkdir internet intranet
 cp index.html internet/
 cp index.html intranet/
-nano internet/index.html 
-nano intranet/index.html 
+nano internet/index.html
+nano intranet/index.html
 ```
 
 * Así quedaría la estructura
@@ -77,7 +77,7 @@ root@servidor:/var/www# tree
 chown -R www-data:www-data /var/www/departamentos
 ```
 
-* Comprobamos que se ha cambiado el propietario 
+* Comprobamos que se ha cambiado el propietario
 
 ```sh
 root@servidor:~# ls -l /var/www/ | grep departamentos
@@ -100,16 +100,14 @@ drwxr-xr-x 4 www-data www-data 4096 Nov  2 13:45 departamentos
         <Directory /var/www/departamentos>
                 Options FollowSymLinks Indexes MultiViews
                 AllowOverride None
-                Order allow,deny
-                allow from all
+                Require all granted
         </Directory>
 
         <Directory /var/www/departamentos/intranet>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride None
-                Order deny,allow
-                deny from all  
-                Allow from 10.0.0.0/24
+                Require all denied
+                Require ip 10.0.0.3
         </Directory>
 
         <Directory /var/www/departamentos/internet>
@@ -152,7 +150,7 @@ ff02::2 ip6-allrouters
 
 ```
 
-* En la máquina cliente hacemos lo mismo pero poniendo la dirección ip de la interfaz de red  del servidor que está conectada a la red local y el nombre del host virtual. 
+* En la máquina cliente hacemos lo mismo pero poniendo la dirección ip de la interfaz de red  del servidor que está conectada a la red local y el nombre del host virtual.
 
 ```sh
 127.0.0.1       localhost
@@ -205,3 +203,100 @@ vagrant@cliente:~$ lynx www.departamentos.iesgn.org/internet
 ```
 
 ![internetcliente.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/internetcliente.png)
+
+### 2. Autentificación básica. Limita el acceso a la URL departamentos.iesgn.org/secreto. Comprueba las cabeceras de los mensajes HTTP que se intercambian entre el servidor y el cliente. ¿Cómo se manda la contraseña entre el cliente y el servidor?. Entrega una breve explicación del ejercicio.
+
+
+* Primero debemos de crear el directorio *secreto* en departamentos sin olvidar cambiar el propietario, como hemos hecho anteriormente.
+
+```sh
+root@servidor:/var/www/departamentos# ls -l
+total 16
+-rw-r--r-- 1 www-data www-data  182 Nov  2 13:36 index.html
+drwxr-xr-x 2 www-data www-data 4096 Nov  2 13:47 internet
+drwxr-xr-x 2 www-data www-data 4096 Nov  2 13:47 intranet
+drwxr-xr-x 2 www-data www-data 4096 Nov  2 15:10 secreto
+```
+
+Para limitar el acceso a la pagina 'secreto' necesitamos implementar el método e autentificación básica, para ello, necesitamos crear un fichero de contraseñas que se genera mediante *htpasswd* con la ruta donde guardamos la contraseña y el nombre del que se le va dar permiso. En esa ruta debe de haber un directorio que vamos a crear ahora mismo.
+
+* Crear el directorio 'claves'
+
+```sh
+root@servidor:/etc/apache2# mkdir claves
+```
+
+* Crear fichero de contraseñas
+
+```sh
+root@servidor:/etc/apache2# htpasswd -c /etc/apache2/claves/passwd.txt root
+New password:
+Re-type new password:
+Adding password for user root
+```
+
+* Vemos que se ha guardado el fichero con las contraseñas
+
+```sh
+root@servidor:/etc/apache2/claves# ls
+passwd.txt
+
+root@servidor:/etc/apache2/claves# cat passwd.txt
+root:$apr1$cF/a2VEa$HanMH/3gocabJWDMqj12c.
+
+```
+* Editamos el fichero de configuracion de nuestro virtual host
+
+```sh
+nano /etc/apache2/sites-available/departamentos.conf
+```
+```sh
+<VirtualHost *:80>
+
+        ServerName departamentos.iesgn.org
+        ServerAlias www.departamentos.iesgn.org
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/departamentos
+
+        <Directory /var/www/departamentos>
+                Options FollowSymLinks Indexes MultiViews
+                AllowOverride None
+                Require all granted
+        </Directory>
+
+        <Directory /var/www/departamentos/intranet>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Require all denied
+                Require ip 10.0.0.3
+        </Directory>
+
+        <Directory /var/www/departamentos/internet>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                Allow from all
+                deny from 10.0.0.0/24
+        </Directory>
+
+        <Directory /var/www/departamentos/secreto>
+                AuthUserFile "/etc/apache2/claves/passwd.txt"
+                AuthName "Usuario y contraseña"
+                AuthType Basic
+                Require valid-user
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+```
+
+* Reiniciamos el servidor y comprobamos que funciona
+
+![secreto.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/secreto.png)
+
+
+![secreto2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/secreto2.png)
+
