@@ -204,7 +204,7 @@ vagrant@cliente:~$ lynx www.departamentos.iesgn.org/internet
 
 ![internetcliente.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/internetcliente.png)
 
-### 2. Autentificación básica. Limita el acceso a la URL departamentos.iesgn.org/secreto. Comprueba las cabeceras de los mensajes HTTP que se intercambian entre el servidor y el cliente. ¿Cómo se manda la contraseña entre el cliente y el servidor?. Entrega una breve explicación del ejercicio.
+### 2. Autentificación básica. Limita el acceso a la URL departamentos.iesgn.org/secreto. 
 
 
 * Primero debemos de crear el directorio *secreto* en departamentos sin olvidar cambiar el propietario, como hemos hecho anteriormente.
@@ -300,3 +300,120 @@ nano /etc/apache2/sites-available/departamentos.conf
 
 ![secreto2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/secreto2.png)
 
+### 2.1. Comprueba las cabeceras de los mensajes HTTP que se intercambian entre el servidor y el cliente. ¿Cómo se manda la contraseña entre el cliente y el servidor?. Entrega una breve explicación del ejercicio.
+
+```sh
+root@debian:/home/celiagm/github/virtualhosting_apache# curl -i 'http://www.departamentos.iesgn.org/secreto'
+HTTP/1.1 401 Unauthorized
+Date: Mon, 02 Nov 2020 16:28:59 GMT
+Server: Apache/2.4.38 (Debian)
+WWW-Authenticate: Basic realm="Usuario y contraseña"
+Content-Length: 474
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>401 Unauthorized</title>
+</head><body>
+<h1>Unauthorized</h1>
+<p>This server could not verify that you
+are authorized to access the document
+requested.  Either you supplied the wrong
+credentials (e.g., bad password), or your
+browser doesn't understand how to supply
+the credentials required.</p>
+<hr>
+<address>Apache/2.4.38 (Debian) Server at www.departamentos.iesgn.org Port 80</address>
+</body></html>
+
+```
+
+Vemos que nos responde con un 401 que necesita de autorización requerida, es decir el usuario y la contraseña que le hemos puesto. La contraseña la manda el cliente encriptada al servidor.
+
+
+### 3. Cómo hemos visto la autentificación básica no es segura, modifica la autentificación para que sea del tipo digest, y sólo sea accesible a los usuarios pertenecientes al grupo directivos. Comprueba las cabeceras de los mensajes HTTP que se intercambian entre el servidor y el cliente. ¿Cómo funciona esta autentificación?
+
+* Usamos el módulo *auth_digest*
+
+```sh
+root@servidor:/home/vagrant# a2enmod auth_digest
+Considering dependency authn_core for auth_digest:
+Module authn_core already enabled
+Enabling module auth_digest.
+To activate the new configuration, you need to run:
+  systemctl restart apache2
+
+```
+
+* Modificamos el fichero
+
+```sh
+        <Directory /var/www/departamentos/secreto>
+                AuthUserFile "/etc/apache2/claves/digest.txt"
+                AuthName "directivos"
+                AuthType Digest
+                Require valid-user
+        </Directory>
+
+```
+
+* La directiva **Authname** se usa para pedir el usuario y la contraseña pero además para identificar un nombre de dominio que debe coincidir con el que aparezca en el fichero de contraseñas. Generamos el fichero:
+
+```sh
+root@servidor:/home/vagrant# htdigest -c /etc/apache2/claves/digest.txt directivos root
+Adding password for root in realm directivos.
+New password: 
+Re-type new password: 
+```
+
+* la opcion -c es solo para crear el fichero si queremos añadir mas usuarios no la usaremos. En este caso añadimos el usuario vagrant perteneciente a 'otros' que no tendrá acceso.
+
+```sh
+root@servidor:/home/vagrant# htdigest /etc/apache2/claves/digest.txt otro vagrant
+Adding user vagrant in realm otro
+New password: 
+Re-type new password: 
+```
+
+* Reiniciamos el servidor de apache
+
+```sh
+systemctl restart apache2
+```
+
+* Comprobamos que desde root podemos acceder ya que pertenece a 'directivos'
+
+![directivosroot1.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/directivosroot1.png)
+![directivosroot2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/directivosroot2.png)
+
+* Desde el usuario vagrant no podemos acceder ya que pertenece a 'otros'
+
+![directivosvagrant.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/directivosvagrant.png)
+
+* Observamos las cabeceras con curl y vemos que el tipo de autentificación es *Digest* y que se puede acceder solo con los usuarios pertenecientes al grupo 'directivos'. El algoritmo de cifrado es MD5.
+
+```sh
+celiagm@debian:~$ curl -i http://www.departamentos.iesgn.org/secreto/
+HTTP/1.1 401 Unauthorized
+Date: Mon, 02 Nov 2020 17:32:13 GMT
+Server: Apache/2.4.38 (Debian)
+WWW-Authenticate: Digest realm="directivos", nonce="TNd2ICOzBQA=a6df1dd59a13a3a9bed849cf434e13671df766dd", algorithm=MD5, qop="auth"
+Content-Length: 474
+Content-Type: text/html; charset=iso-8859-1
+
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>401 Unauthorized</title>
+</head><body>
+<h1>Unauthorized</h1>
+<p>This server could not verify that you
+are authorized to access the document
+requested.  Either you supplied the wrong
+credentials (e.g., bad password), or your
+browser doesn't understand how to supply
+the credentials required.</p>
+<hr>
+<address>Apache/2.4.38 (Debian) Server at www.departamentos.iesgn.org Port 80</address>
+</body></html>
+
+```
