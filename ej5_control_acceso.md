@@ -417,3 +417,63 @@ the credentials required.</p>
 </body></html>
 
 ```
+
+### 4. Vamos a combinar el control de acceso (ejercicio 1) y la autentificación (Ejercicios 2 y 3), y vamos a configurar el virtual host para que se comporte de la siguiente manera: el acceso a la URL departamentos.iesgn.org/secreto se hace forma directa desde la intranet, desde la red pública te pide la autentificación. Muestra el resultado al profesor.
+
+* Modificamos el fichero departamentos.conf y le añadimos las lineas para permitir el acceso de forma directa desde la intranet.
+
+```sh
+<VirtualHost *:80>
+
+        ServerName departamentos.iesgn.org
+        ServerAlias www.departamentos.iesgn.org
+        ServerAdmin webmaster@localhost
+        DocumentRoot /var/www/departamentos
+
+        <Directory /var/www/departamentos>
+                Options FollowSymLinks Indexes MultiViews
+                AllowOverride None
+                Require all granted
+        </Directory>
+
+        <Directory /var/www/departamentos/intranet>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Require all denied
+                Require ip 10.0.0.3
+        </Directory>
+
+        <Directory /var/www/departamentos/internet>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                Allow from all
+                deny from 10.0.0.0/24
+        </Directory>
+
+        <Directory /var/www/departamentos/secreto>
+                AuthUserFile "/etc/apache2/claves/digest.txt"
+                AuthName "directivos"
+                AuthType Digest
+                Require valid-user
+                Order allow,deny
+                Allow from 10.0.0.3
+                satisfy any
+        </Directory>
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+</VirtualHost>
+
+```
+* Reiniciamos el servidor
+
+* Accedemos desde la máquina física y vemos que nos pide el nombre y la contraseña.
+
+![directivosfisica.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/directivosfisica.png)
+
+* Si accedemos dede la máquina cliente conectada a la intranet no nos pide contraseña.
+
+![clientesecreto1.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/clientesecreto1.png)
+
