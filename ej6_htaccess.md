@@ -25,6 +25,8 @@ Date de alta en un proveedor de hosting. ¿Si necesitamos configurar el servidor
 
 ### 1.Habilita el listado de ficheros en la URL http://host.dominio/nas.
 
+enlace-->> https://cgm-iesgn.000webhostapp.com/nas
+
 * Añadimos la opcion indexes a nuestro archivo .htaccess
 
 ![indexes.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/indexes.png)
@@ -45,6 +47,8 @@ Date de alta en un proveedor de hosting. ¿Si necesitamos configurar el servidor
 
 ### 2.Crea una redirección permanente: cuando entremos en ttp://host.dominio/google salte a www.google.es.
 
+enlace-->> https://cgm-iesgn.000webhostapp.com/google
+
 * Podemos hacerlo de dos formas, en la misma plataforma hay una opcion de redireccion y la agregamos ahí o bien directamente sobre el fichero .htaccess
 
 ![redireccion.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/redireccion.png)
@@ -56,6 +60,7 @@ Date de alta en un proveedor de hosting. ¿Si necesitamos configurar el servidor
 ![comp1.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/comp1.png)
 
 ![comp2.png](https://github.com/CeliaGMqrz/virtualhosting_apache/blob/main/capturas/comp2.png)
+
 
 
 ### 3. Pedir autentificación para entrar en la URL http://host.dominio/prohibido.
